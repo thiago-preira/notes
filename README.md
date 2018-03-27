@@ -2,6 +2,7 @@
 Markdown notes with general purpose
 ## Alias
 Alias to make easy develop
+Create a file named **.bash_aliases** at your home directory
 ```
 alias svim='sudo vim'
 alias timestamp="date +'%Y%m%d%H%M%S'"
