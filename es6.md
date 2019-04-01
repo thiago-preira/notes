@@ -98,3 +98,45 @@ let person = {
 };
 let {name, age} = person; // Notice the {} instead of []
 ```
+
+## Modules and Classes
+
+### Modules
+Allows multiple split code in muiltiple files:
+
+```javascript
+// export.js
+export let myExportedVar = 42;
+// import.js
+import { myExportedVar } from ‘./export.js’;
+```
+
+### Classes
+Create classes using **class** keyword:
+
+```javascript
+class Person {
+    greet() {
+        this.name = ‘Max’; // this is how you set up properties!
+        console.log('Hello!');
+    }
+}
+let person = new Person();
+person.greet(); // prints ‘Hello!’
+```
+Inheritance with ES6 classes:
+```javascript
+class Max extends Person {
+    constructor(name) {
+        this.name = name;
+    }
+}
+```
+Static methods:
+```javascript
+class Helper {
+    static log(message) {
+        console.log(message);
+    }
+}
+```
