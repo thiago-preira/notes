@@ -140,3 +140,22 @@ class Helper {
     }
 }
 ```
+## Symbols
+Symbols are a new primitive type in ES6. Basically, a Symbol is a unique ID.
+```javascript
+let symbol = Symbol(‘only for debugging, this is not the ID!’);
+```
+
+Each symbol is unique
+
+```javascript
+let symbol1 = Symbol(‘only for debugging, this is not the ID!’);
+let symbol2 = Symbol(‘only for debugging, this is not the ID!’);
+if (symbol1 == symbol2) { ... } // false
+```
+When using static method *for* they are registered in a global symbol registry, so they become not unique.
+```javascript
+let ageSymbol1 = Symbol.for('age');
+let ageSymbol2 = Symbol.for('age');
+if (ageSymbol1 == ageSymbol2) { ... } // true
+```
