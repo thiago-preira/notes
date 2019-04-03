@@ -159,3 +159,52 @@ let ageSymbol1 = Symbol.for('age');
 let ageSymbol2 = Symbol.for('age');
 if (ageSymbol1 == ageSymbol2) { ... } // true
 ```
+
+## Iterators & Generators
+
+### Iterators
+Iterator has a function `next()` which allows to output values step by step.
+```javascript
+let array = [1, 2, 3];
+let iterator = array[Symbol.iterator]();
+console.log(iterator.next()); // prints {done: false, value: 1}
+```
+Done becames true when there are no more values. 
+
+```javascript
+let iterableObj = {
+    [Symbol.iterator]() {
+        let nextVal = 5;
+        return {
+            next() {
+                return {
+                    value: nextVal++,
+                    done: false
+                }
+            }
+        }
+    }
+};
+let iterator = iterableObj[Symbol.iterator]();
+console.log(iterator.next()); // {done: false, value: 5}
+```
+
+### Generators
+Functions which don’t necessarily run to the end upon
+execution.
+Instead, upon each call they yield a value. A generator is created by adding
+an asterisk in front of the function name.
+
+```javascript
+function *select() {
+    yield 'House Data';
+    yield 'Person Data';
+}
+```
+When executing a function an iterator is returned. 
+```javascript
+let iterator = select();
+console.log(iterator.next()); // prints House Data
+console.log(iterator.next()); // prints Person Data
+console.log(iterator.next()); // prints undefined
+```
