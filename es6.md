@@ -208,3 +208,36 @@ console.log(iterator.next()); // prints House Data
 console.log(iterator.next()); // prints Person Data
 console.log(iterator.next()); // prints undefined
 ```
+## Promisses
+Promises to return a certain value – even if the
+underlying task fails. In such a failure case, the promise would be rejected
+but the caller would still be informed.
+
+```javascript
+let promise = new Promise(function(resolve, reject) {
+    setTimeout(function() { // setTimeout to simulate async task
+        resolve('Done!');
+    }, 1000);
+});
+
+promise.then(function(value) {
+    console.log(value); // prints Done!
+});
+
+let fnWaitASecond = function(secondsPassed) {
+    return new Promise(function(resolve, reject) {
+        setTimeout(function() {
+            secondsPassed++;
+            resolve(secondsPassed);
+        }, 1000);
+    });
+};
+fnWaitASecond(0)
+.then(fnWaitASecond) // Passes value automatically
+.then(function(seconds) {
+    console.log('Promises: waited ' + seconds + ' seconds');
+});
+```
+
+`race()` returns first Promise to resolve. You’ll get a value as soon as the first Promise is resolved.
+With `all()` returns value once all Promises were resolved.
