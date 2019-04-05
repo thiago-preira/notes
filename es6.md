@@ -241,3 +241,52 @@ fnWaitASecond(0)
 
 `race()` returns first Promise to resolve. You’ll get a value as soon as the first Promise is resolved.
 With `all()` returns value once all Promises were resolved.
+
+## Maps, Sets & Subclassing
+
+### Map
+Map is a key-value collection
+```javascript
+let cardAce = {
+name: 'Ace of Spades'
+};
+let cardKing = {
+name: 'King of Clubs'
+};
+let deck = new Map();
+deck.set('as', cardAce);
+deck.set('kc', cardKing);
+```
+Use `get(key)` method to return a value. Use `delete(key)` to remove.
+
+### Set
+A Set is a collection that only hold unique values. 
+You can loop through a set to retrieve the values (or use an Iterator). You
+can also `clear()` a set or delete individual values by using `delete()`.
+ ```javascript
+ ou can create a Set like this:
+let cardAce = {
+name: 'Ace of Spades'
+};
+let cardKing = {
+name: 'King of Clubs'
+};
+let deck = new Set();
+deck.add(cardAce);
+deck.add(cardKing);
+deck.add(cardKing); // Won’t be added, only added once!
+ ```
+
+### Subclassing
+Subclassing means that you can now extend certain JavaScript
+base-objects. 
+```javascript
+class ConvertableArray extends Array {
+convert() {
+let returnArray = [];
+this.forEach(value => returnArray.push('' + value));
+return returnArray;
+}
+}
+```
+
