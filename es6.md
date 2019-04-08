@@ -289,4 +289,40 @@ return returnArray;
 }
 }
 ```
+## Reflect API
+
+###Metaprogramming
+Reflect API provides useful methods to create, manipulate and query objects and functions in your JavaScript project.
+
+###Object Construction
+```javascript
+class Person {
+}
+let person = Reflect.construct(Person, []);
+```
+###Prototypes
+```javascript
+class Person {
+}
+let config = {
+greet() {
+console.log('Hello there!');
+}
+}
+let person = Reflect.construct(Person, []);
+Reflect.setPrototypeOf(person, config)
+```
+
+###Properties
+Reflect also offers methods to define properties on objects
+(defineProperty()), delete them (deleteProperty()), as well as get (get())
+and set (set()) properties.
+
+###Functions
+You may also use Reflect to execute functions:
+```javascript
+Reflect.apply(person.greet, person, []);
+```
+
+
 
