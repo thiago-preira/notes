@@ -323,6 +323,56 @@ You may also use Reflect to execute functions:
 ```javascript
 Reflect.apply(person.greet, person, []);
 ```
+## Proxy API
+Proxy API allows to wrap objects, functions, whatever and trap/
+handle incoming property accessing, function calls etc. Acts as filter or barrier which has to be passed and which may interrupt access on the wrapped element.
 
+```javascript
+class Person {
+constructor(name, age) {
+this.name = name;
+this.age = age;
+}
+}
+let person = new Person('Max', 27);
+let proxy = new Proxy(person, {
+// Setup traps here
+get: function(target, property, receiver) {
+return 'Something else';
+}
+});
+```
+### Wrapping Functions
+```javascript
+function log(message) {
+console.log('Log entry created: ' + message);
+}
+let proxy = new Proxy(log, {
+apply: function(target, thisArg, argumentsList) {
+if (argumentsList[0].length < 20) {
+return Reflect.apply(target, thisArg, argumentsList);
+}
+return false;
+}
+});
+proxy('Hello!');
+proxy('Hello, this is a very long message!');
+``` 
 
+###Proxies as Prototypes
+```javascript
+let person = {
+name: 'Anna'
+};
+let proxy = new Proxy({}, { // notice the empty object!
+get: function (target, property, receiver) {
+return 'Property ' + property + ' not found!';
+}
+});
+Reflect.setPrototypeOf(person, proxy);
+console.log(person.name);
+console.log(person.age); // not found
+```
 
+###Revocable Proxies
+proxies (created via `Proxy.revocable()`, without new keyword!) can be revoked.
