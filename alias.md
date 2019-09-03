@@ -15,4 +15,6 @@ alias boot-run="mvn spring-boot:run"
 alias maven-deploy="mvn -B -Prelease -Darguments='-DskipTests=false -Dmaven.javadoc.skip=true' release:clean release:prepare release:perform"
 
 alias gac="git add . && git commit -a -m "
+alias docker-clean-unused="docker system prune --all --force --volumes"
+alias docker-clean-all="docker stop $(docker container ls -a -q) && docker system prune -a -f --volumes"
 ```
